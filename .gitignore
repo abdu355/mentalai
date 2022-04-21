@@ -132,3 +132,6 @@ dmypy.json
 # rasa
 .rasa
 models
+*.dot
+*.csv
+empatheticdialogues
