@@ -10,22 +10,20 @@ pipeline:
   # # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
   # # If you'd like to customize it, uncomment and adjust the pipeline.
   # # See https://rasa.com/docs/rasa/tuning-your-model for more information.
-  - name: WhitespaceTokenizer
-  - name: RegexFeaturizer
-  - name: LexicalSyntacticFeaturizer
-  - name: CountVectorsFeaturizer
-  - name: CountVectorsFeaturizer
-    analyzer: char_wb
-    min_ngram: 1
-    max_ngram: 4
-  - name: DIETClassifier
+  - name: SpacyNLP # spacy NLP pipeline
+    model: "en_core_web_md"
+  - name: SpacyTokenizer # spacy tokenizer for en
+  - name: LanguageModelFeaturizer #BERT feature extraction model
+    model_name: "bert"
+    model_weights: "rasa/LaBSE"
+  - name: DIETClassifier #intent classifier model
     epochs: 100
     constrain_similarities: true
-  - name: EntitySynonymMapper
-  - name: ResponseSelector
+  - name: EntitySynonymMapper #entity prediction model
+  - name: ResponseSelector #bot response prediction model
     epochs: 100
     constrain_similarities: true
-  - name: FallbackClassifier
+  - name: FallbackClassifier #fallback classifier model
     threshold: 0.3
     ambiguity_threshold: 0.1
 
