@@ -9,6 +9,7 @@ intents:
 - mood_anxiety
 - mood_depressed
 - mood_great
+- test
 responses:
   utter_depression_action_plan:
   - text: Seems like your suffering from a mild to medium case of depression. Choose people who you can talk to or who can do your activities with you. Talk to them about how you feel. If you can't talk about it, that's okay.
@@ -35,6 +36,7 @@ session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
+- action_hello_world
 - utter_anxiety_action_plan
 - utter_cheer_up
 - utter_depression_action_plan

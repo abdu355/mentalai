@@ -94,3 +94,20 @@ stories:
       - action: utter_helpline
       - intent: affirm
       - action: utter_happy
+
+  - story: hello world path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: test
+        entities:
+          - mental_case: anxiety
+          - mental_case: depression
+      - action: action_hello_world
+
+  - story: interactive_story_1
+    steps:
+      - intent: test
+        entities:
+          - mental_case: depression
+      - action: action_hello_world
