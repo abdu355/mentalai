@@ -1,32 +1,44 @@
-version: "3.1"
+version: '3.1'
 intents:
-  - affirm
-  - bot_challenge
-  - deny
-  - goodbye
-  - greet
-  - mood_great
-  - mood_unhappy
+- affirm
+- bot_challenge
+- deny
+- emergency
+- goodbye
+- greet
+- mood_anxiety
+- mood_depressed
+- mood_great
 responses:
+  utter_depression_action_plan:
+  - text: Choose people who you can talk to or who can do your activities with you. Talk to them about how you feel. If you can't talk about it, that's okay.
+  utter_anxiety_action_plan:
+  - text: How you think affects how you feel. Anxiety can make you overestimate the danger in a situation and underestimate your ability to handle it. Try to think of different interpretations to a situation that's making you anxious, rather than jumping to the worst-case scenario. Look at the facts for and against your thought being true.
   utter_greet:
-    - text: Hey! How are you?
+  - text: Hey! How are you?
   utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: https://i.imgur.com/nGF1K8f.jpg
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-    - text: Did that help you?
+  - text: Did that help you?
   utter_happy:
-    - text: Great, carry on!
+  - text: Great, carry on!
   utter_goodbye:
-    - text: Bye
+  - text: Bye
   utter_iamabot:
-    - text: I am a bot, powered by Rasa.
+  - text: I am a bot, powered by Rasa.
+  utter_helpline:
+  - text: Please call this helpline 800HOPE (8004673) or visit https://hope.hw.gov.ae/
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
-  - utter_cheer_up
-  - utter_did_that_help
-  - utter_goodbye
-  - utter_greet
-  - utter_happy
+- utter_anxiety_action_plan
+- utter_cheer_up
+- utter_did_that_help
+- utter_goodbye
+- utter_greet
+- utter_happy
+- utter_helpline
+entities:
+- mental_case

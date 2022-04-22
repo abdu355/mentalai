@@ -8,34 +8,76 @@ stories:
       - intent: mood_great
       - action: utter_happy
 
-  - story: sad path 1
+  - story: depression path 1
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: mood_unhappy
+      - intent: mood_depressed
       - action: utter_cheer_up
       - action: utter_did_that_help
       - intent: affirm
       - action: utter_happy
 
-  - story: sad path 2
+  - story: depression path 2
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: mood_unhappy
+      - intent: mood_depressed
       - action: utter_cheer_up
       - action: utter_did_that_help
       - intent: deny
-      - action: utter_goodbye
+      - action: utter_depression_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
 
-  - story: interactive_story_1
+  - story: depression path 3
     steps:
       - intent: greet
       - action: utter_greet
-      - intent: mood_unhappy
+      - intent: mood_depressed
       - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_depression_action_plan
       - action: utter_did_that_help
       - intent: affirm
       - action: utter_happy
-      - intent: goodbye
-      - action: utter_goodbye
+
+  - story: anxiety path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_anxiety
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+
+  - story: anxiety path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_anxiety
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+
+  - story: anxiety_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_anxiety
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - intent: emergency
+      - action: utter_helpline
+      - intent: emergency
+        entities:
+          - mental_case: anxiety
+      - action: utter_helpline
+      - intent: affirm
+      - action: utter_happy
