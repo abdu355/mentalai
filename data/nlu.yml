@@ -1322,6 +1322,7 @@ nlu:
     - My friend's grandmother passed away and I felt this way.
     - My 12 year old lab just passed away.  He was my buddy and I am really upset about losing him.
     - I have been alone for almost 5 years now.
+    - im depressed
 - intent: mood_anxiety
   examples: |
     - A recent job interview that I had made me feel very anxious because I felt like I didn't come prepared.

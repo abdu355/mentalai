@@ -75,9 +75,22 @@ stories:
       - action: utter_helpline
       - intent: emergency
       - action: utter_helpline
-      - intent: emergency
+      - intent: emergency # user prompt with severe anxiety
         entities:
           - mental_case: anxiety
+      - action: utter_helpline
+      - intent: affirm
+      - action: utter_happy
+
+  - story: depression_story_1
+    steps:
+      - intent: mood_depressed
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_depression_action_plan
+      - action: utter_did_that_help
+      - intent: deny
       - action: utter_helpline
       - intent: affirm
       - action: utter_happy
