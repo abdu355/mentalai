@@ -21,7 +21,7 @@ class ActionHelloWorld(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        mental_case = next(tracker.get_latest_entity_values("mental_case"), None)
-        dispatcher.utter_message(text=f"Testing {mental_case}")
+        mental_condition = next(tracker.get_latest_entity_values("mental_condition"), None)
+        dispatcher.utter_message(text=f"Testing {mental_condition}")
 
         return []

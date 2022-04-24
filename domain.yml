@@ -1,14 +1,18 @@
 version: '3.1'
 intents:
+- abort
 - affirm
 - bot_challenge
 - deny
 - emergency
 - goodbye
 - greet
+- inform_mood
 - mood_anxiety
 - mood_depressed
 - mood_great
+- nlu_fallback
+- request_condition
 - test
 responses:
   utter_depression_action_plan:
@@ -29,15 +33,26 @@ responses:
   utter_iamabot:
   - text: I am a bot, powered by Rasa.
   utter_helpline:
-  - text: Please call this helpline 800HOPE (8004673) or visit https://hope.hw.gov.ae/
+  - text: It seems your case is beyond what I can handle for now. Please call this helpline 800HOPE (8004673) or visit https://hope.hw.gov.ae/
   utter_please_rephrase:
   - text: I don't think i can help with that. Can you rephrase ?
+  utter_ask_continue:
+  - text: Are you sure you don't want to continue ?
+  utter_submit:
+  - text: Thank you for your response!
+  utter_ask_illness:
+  - text: For the sake of record keeping, please indicate your condition
+  utter_ask_illness_level:
+  - text: Please indicate your condition severity level (e.g., mild, medium, severe)
+  utter_slots_values:
+  - text: 'Condition: {illness}, Severity: {illness_level}'
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
 - action_hello_world
 - utter_anxiety_action_plan
+- utter_ask_continue
 - utter_cheer_up
 - utter_depression_action_plan
 - utter_did_that_help
@@ -46,9 +61,28 @@ actions:
 - utter_happy
 - utter_helpline
 - utter_please_rephrase
+- utter_slots_values
+- utter_submit
 entities:
-- mental_case
+- mental_condition_level
+- mental_condition
+slots:
+  illness:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: mental_condition
+      not_intent: mood_great
+  illness_level:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: mental_condition_level
+      not_intent: mood_great
 forms:
-  case_form:
+  mental_condition_form:
     required_slots:
-    - mental_case
+    - illness
+    - illness_level
