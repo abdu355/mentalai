@@ -156,15 +156,49 @@ stories:
       - action: mental_condition_form
       - active_loop: mental_condition_form
       - slot_was_set:
-          - requested_slot: illness
+          - requested_slot: mental_condition
       - slot_was_set:
-          - illness: depression
+          - mental_condition: depression
       - slot_was_set:
-          - requested_slot: illness_level
+          - requested_slot: mental_condition_level
       - slot_was_set:
-          - illness_level: severe
+          - mental_condition_level: severe
       - slot_was_set:
           - requested_slot: null
       - active_loop: null
       - action: utter_submit
       - action: utter_slots_values
+      - action: utter_anything_else
+      - intent: deny
+      - action: goodbye
+
+  - story: interactive_story_2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_depressed
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_depression_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - slot_was_set:
+          - requested_slot: mental_condition
+      - slot_was_set:
+          - mental_condition: depression
+      - slot_was_set:
+          - requested_slot: mental_condition_level
+      - slot_was_set:
+          - mental_condition_level: severe
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_submit
+      - action: utter_slots_values
+      - action: utter_anything_else
+      - intent: affirm
+      - action: utter_how_help
