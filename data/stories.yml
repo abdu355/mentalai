@@ -33,8 +33,8 @@ stories:
       - action: mental_condition_form
       - active_loop: mental_condition_form
       - intent: abort
-      - action: utter_ask_continue
-      - intent: abort
+      - action: utter_continue
+      - intent: affirm
       - action: action_deactivate_loop
       - active_loop: null
 
@@ -53,8 +53,8 @@ stories:
       - action: mental_condition_form
       - active_loop: mental_condition_form
       - intent: abort
-      - action: utter_ask_continue
-      - intent: abort
+      - action: utter_continue
+      - intent: affirm
       - action: action_deactivate_loop
       - active_loop: null
 
@@ -67,6 +67,13 @@ stories:
       - action: utter_did_that_help
       - intent: affirm
       - action: utter_happy
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - intent: abort
+      - action: utter_continue
+      - intent: affirm
+      - action: action_deactivate_loop
+      - active_loop: null
 
   - story: anxiety path 2
     steps:
@@ -77,69 +84,21 @@ stories:
       - action: utter_did_that_help
       - intent: deny
       - action: utter_helpline
-
-  - story: anxiety_story_1
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: mood_anxiety
-      - action: utter_anxiety_action_plan
-      - action: utter_did_that_help
-      - intent: deny
-      - action: utter_helpline
-      - intent: emergency
-      - action: utter_helpline
-      - intent: emergency # user prompt with severe anxiety
-        entities:
-          - mental_condition: anxiety
-      - action: utter_helpline
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - intent: abort
+      - action: utter_continue
       - intent: affirm
-      - action: utter_happy
+      - action: action_deactivate_loop
+      - active_loop: null
 
-  - story: depression_story_1
+  - story: hello world path # testing custom action
     steps:
-      - intent: mood_depressed
-      - action: utter_cheer_up
-      - action: utter_did_that_help
-      - intent: deny
-      - action: utter_depression_action_plan
-      - action: utter_did_that_help
-      - intent: deny
-      - action: utter_helpline
-      - intent: affirm
-      - action: utter_happy
-
-  - story: hello world path
-    steps:
-      - intent: greet
-      - action: utter_greet
       - intent: test
         entities:
           - mental_condition: anxiety
           - mental_condition: depression
       - action: action_hello_world
-
-  - story: interactive_story_1
-    steps:
-      - intent: test
-        entities:
-          - mental_condition: depression
-      - action: action_hello_world
-
-  - story: interactive_story_1
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - intent: mood_depressed
-      - action: utter_cheer_up
-      - action: utter_did_that_help
-      - intent: deny
-      - action: utter_depression_action_plan
-      - action: utter_did_that_help
-      - intent: deny
-      - action: utter_helpline
-      - intent: affirm
-      - action: utter_happy
 
   - story: interactive_story_1
     steps:
@@ -170,7 +129,7 @@ stories:
       - action: utter_slots_values
       - action: utter_anything_else
       - intent: deny
-      - action: goodbye
+      - action: utter_goodbye
 
   - story: interactive_story_2
     steps:
@@ -202,3 +161,108 @@ stories:
       - action: utter_anything_else
       - intent: affirm
       - action: utter_how_help
+
+  - story: interactive_story_3
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_depressed
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_depression_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - slot_was_set:
+          - requested_slot: mental_condition
+      - slot_was_set:
+          - mental_condition: depression
+      - slot_was_set:
+          - requested_slot: mental_condition_level
+      - slot_was_set:
+          - mental_condition_level: medium
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_submit
+      - action: utter_slots_values
+      - action: utter_anything_else
+      - intent: affirm
+      - action: utter_how_help
+      - intent: mood_anxiety
+        entities:
+          - mental_condition: anxious
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: interactive_story_1_mix
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_depressed
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_depression_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - slot_was_set:
+          - requested_slot: mental_condition
+      - slot_was_set:
+          - mental_condition: depression
+      - slot_was_set:
+          - requested_slot: mental_condition_level
+      - slot_was_set:
+          - mental_condition_level: medium
+      - slot_was_set:
+          - requested_slot: null
+      - active_loop: null
+      - action: utter_submit
+      - action: utter_slots_values
+      - action: utter_anything_else
+      - intent: mood_anxiety
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - action: utter_anything_else
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: anxiety_story_1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_anxiety
+      - action: utter_anxiety_action_plan
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_helpline
+      - action: mental_condition_form
+      - active_loop: mental_condition_form
+      - slot_was_set:
+          - requested_slot: mental_condition
+      - slot_was_set:
+          - mental_condition: anxiety
+      - slot_was_set:
+          - requested_slot: mental_condition_level
+      - intent: mood_anxiety
+        entities:
+          - mental_condition_level: mild
+          - mental_condition: anxiety
+      - action: utter_submit
+      - action: utter_slots_values
+      - action: utter_anything_else
+      - intent: deny
+      - intent: goodbye
+      - action: utter_goodbye

@@ -1,94 +1,104 @@
-version: "3.1"
+version: '3.1'
 intents:
-  - abort
-  - affirm
-  - bot_challenge
-  - deny
-  - emergency
-  - goodbye
-  - greet
-  - inform_mood
-  - mood_anxiety
-  - mood_depressed
-  - mood_great
-  - nlu_fallback
-  - request_condition
-  - test
+- abort
+- affirm
+- bot_challenge
+- deny
+- emergency
+- goodbye
+- greet
+- inform_mood
+- mood_anxiety
+- mood_depressed
+- mood_great
+- nlu_fallback
+- request_condition
+- test
 responses:
   utter_depression_action_plan:
-    - text: Seems like your suffering from a mild to medium case of depression. Choose people who you can talk to or who can do your activities with you. Talk to them about how you feel. If you can't talk about it, that's okay.
+  - text: Seems like your suffering from a mild to medium case of depression. Choose people who you can talk to or who can do your activities with you. Talk to them about how you feel. If you can't talk about it, that's okay.
   utter_anxiety_action_plan:
-    - text: Seems like your suffering from a mild to medium case of anxiety. How you think affects how you feel. Anxiety can make you overestimate the danger in a situation and underestimate your ability to handle it. Try to think of different interpretations to a situation that's making you anxious, rather than jumping to the worst-case scenario. Look at the facts for and against your thought being true.
+  - text: Seems like your suffering from a mild to medium case of anxiety. How you think affects how you feel. Anxiety can make you overestimate the danger in a situation and underestimate your ability to handle it. Try to think of different interpretations to a situation that's making you anxious, rather than jumping to the worst-case scenario. Look at the facts for and against your thought being true.
   utter_greet:
-    - text: Hey! How are you?
+  - text: Hey there! How are you ?
   utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: https://i.imgur.com/nGF1K8f.jpg
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
   utter_did_that_help:
-    - text: Did that help you?
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No
+    text: Did that help you ?
   utter_happy:
-    - text: Great, carry on!
+  - text: Great, carry on!
   utter_goodbye:
-    - text: Bye
+  - text: Bye!
   utter_iamabot:
-    - text: I am a bot, powered by Rasa.
+  - text: I am a bot, powered by Rasa.
   utter_helpline:
-    - text: It seems your case is beyond what I can handle for now. Please call this helpline 800HOPE (8004673) or visit https://hope.hw.gov.ae/
+  - text: It seems your case is beyond what I can handle for now. Please call this helpline 800HOPE (8004673) or visit https://hope.hw.gov.ae/
   utter_please_rephrase:
-    - text: I don't think i can help with that. Can you rephrase ?
-  utter_ask_continue:
-    - text: Are you sure you don't want to continue ?
+  - text: I don't think i can help with that. Can you rephrase ?
+  utter_continue:
+  - buttons:
+    - payload: /affirm
+      title: Yes
+    - payload: /deny
+      title: No
+    text: Are you sure you don't want to continue ?
   utter_submit:
-    - text: Thank you for your response!
-  utter_ask_illness:
-    - text: For the sake of record keeping, please indicate your condition
-  utter_ask_illness_level:
-    - text: Please indicate your condition severity level (e.g., mild, medium, severe)
+  - text: Thank you for your response!
+  utter_ask_mental_condition:
+  - text: For the sake of record keeping, please indicate your condition
+  utter_ask_mental_condition_level:
+  - text: Please indicate your condition severity level (e.g., mild, medium, severe)
   utter_slots_values:
-    - text: "Condition: {mental_condition}, Severity: {mental_condition_level}"
+  - text: 'Condition: {mental_condition}, Severity: {mental_condition_level}'
   utter_anything_else:
-    - text: Anything else I can help you with ?
+  - text: Anything else I can help you with ?
   utter_how_help:
-    - text: How can I help ?
+  - text: How can I help ?
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
 actions:
-  - action_hello_world
-  - utter_anxiety_action_plan
-  - utter_ask_continue
-  - utter_cheer_up
-  - utter_depression_action_plan
-  - utter_did_that_help
-  - utter_goodbye
-  - utter_greet
-  - utter_happy
-  - utter_helpline
-  - utter_please_rephrase
-  - utter_slots_values
-  - utter_submit
-  - utter_anything_else
-  - utter_how_help
+- action_hello_world
+- utter_anxiety_action_plan
+- utter_anything_else
+- utter_cheer_up
+- utter_continue
+- utter_depression_action_plan
+- utter_did_that_help
+- utter_goodbye
+- utter_greet
+- utter_happy
+- utter_helpline
+- utter_how_help
+- utter_please_rephrase
+- utter_slots_values
+- utter_submit
 entities:
-  - mental_condition_level
-  - mental_condition
+- mental_condition_level
+- mental_condition
 slots:
   mental_condition:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: mental_condition
-        not_intent: mood_great
+    - type: from_entity
+      entity: mental_condition
+      not_intent: mood_great
   mental_condition_level:
     type: text
     influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: mental_condition_level
-        not_intent: mood_great
+    - type: from_entity
+      entity: mental_condition_level
+      not_intent: mood_great
 forms:
   mental_condition_form:
     required_slots:
-      - mental_condition
-      - mental_condition_level
+    - mental_condition
+    - mental_condition_level
