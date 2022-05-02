@@ -1,1 +1,1 @@
-# Mental Health AI - Made with Rasa 3
+# Mental Health Chatbot - Made with Rasa 3
